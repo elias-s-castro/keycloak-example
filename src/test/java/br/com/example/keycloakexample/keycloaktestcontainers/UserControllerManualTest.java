@@ -15,13 +15,13 @@ public class UserControllerManualTest extends KeycloakTestContainers{
     @Test
     @DisplayName("Deve pegar o usuário autenticado e retornas suas informações")
     void givenAuthenticatedUser_whenGetMe_shouldReturnMyInfo() {
-        given().header("Authorization", getJaneDoeBearer())
+        given().header("Authorization", getMyUserBearer())
                 .when()
                 .get("/users/me")
                 .then()
-                .body("username", equalTo("janedoe"))
-                .body("lastname", equalTo("Doe"))
-                .body("firstname", equalTo("Jane"))
-                .body("email", equalTo("jane.doe@baeldung.com"));
+                .body("username", equalTo("usertest"))
+                .body("firstname", equalTo("User"))
+                .body("lastname", equalTo("Test"))
+                .body("email", equalTo(" user.test@mytest.com.br"));
     }
 }

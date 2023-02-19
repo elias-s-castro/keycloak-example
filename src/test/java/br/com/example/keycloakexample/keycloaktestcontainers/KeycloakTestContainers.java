@@ -40,18 +40,18 @@ public abstract class KeycloakTestContainers {
 
     @DynamicPropertySource
     static void registerResourceServerIssuerProperty(DynamicPropertyRegistry registry) {
-        registry.add("spring.security.oauth2.resourceserver.jwt.issuer-uri", () -> keycloak.getAuthServerUrl() + "/realms/baeldung");
+        registry.add("spring.security.oauth2.resourceserver.jwt.issuer-uri", () -> keycloak.getAuthServerUrl() + "/realms/MyTest");
     }
 
-    protected String getJaneDoeBearer() {
+    protected String getMyUserBearer() {
         try {
-            URI authorizationURI = new URIBuilder(keycloak.getAuthServerUrl() + "/realms/baeldung/protocol/openid-connect/token").build();
+            URI authorizationURI = new URIBuilder(keycloak.getAuthServerUrl() + "/realms/MyTest/protocol/openid-connect/token").build();
             WebClient webclient = WebClient.builder().build();
 
             MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
             formData.put("grant_type", Collections.singletonList("password"));
-            formData.put("client_id", Collections.singletonList("baeldung-api"));
-            formData.put("username", Collections.singletonList("jane.doe@baeldung.com"));
+            formData.put("client_id", Collections.singletonList("myteste-api"));
+            formData.put("username", Collections.singletonList("user.test@mytest.com.br"));
             formData.put("password", Collections.singletonList("s3cr3t"));
 
             String result = webclient.post()
